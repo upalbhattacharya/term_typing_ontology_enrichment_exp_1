@@ -1,3 +1,3 @@
-# Template Python Package
+# Term Typing Ontology Enrichment Experiment 1
 
-Template package for creating Python projects that uses `nix-direnv` to create a development environment.
+Initial experiment for Term Typing Ontology Enrichment.

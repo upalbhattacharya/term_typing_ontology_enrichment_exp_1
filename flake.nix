@@ -19,46 +19,62 @@
         # The main module
         myapp = pkgs.python3Packages.buildPythonPackage rec {
           # Change name here
-          pname = "template_python_package";
+          pname = "term_typing_ontology_enrichment_exp_1";
           pyproject = true;
-          version="0.1.0";
+          version = "0.1.0";
           src = ./.;
           build-system = [
             (python.withPackages (
               ps: with ps; [
                 # build system
                 setuptools
-              ]))
+              ]
+            ))
           ];
         };
 
         # Python development packages used for development
         # LSP, formatting, etc.
-        devPythonPackages = (python.withPackages (
-          ps: with ps; [
-            python-lsp-server
-            isort
-            black
-            flake8
-          ]));
+        devPythonPackages = (
+          python.withPackages (
+            ps: with ps; [
+              python-lsp-server
+              isort
+              black
+              flake8
+            ]
+          )
+        );
 
         # Python modules for actual package
-        packagePythonPackages = (python.withPackages(
-          ps: with ps; [
-          ]));
+        packagePythonPackages = (
+          python.withPackages (
+            ps:
+            with ps;
+            [
+            ]
+          )
+        );
 
         # Other development packages available in the nixpkgs
-        devPackages = (with pkgs; [
-          nixd
-          nixfmt-rfc-style
-        ]);
+        devPackages = (
+          with pkgs;
+          [
+            nixd
+            nixfmt-rfc-style
+          ]
+        );
       in
       {
-        devShells.default = pkgs.mkShell { packages = [ pkgs.bashInteractive
-                                                        devPackages
-                                                        devPythonPackages
-                                                        packagePythonPackages
-                                                        myapp]; };
+        devShells.default = pkgs.mkShell {
+          packages = [
+            pkgs.bashInteractive
+            devPackages
+            devPythonPackages
+            packagePythonPackages
+            myapp
+          ];
+        };
       }
     );
 }
